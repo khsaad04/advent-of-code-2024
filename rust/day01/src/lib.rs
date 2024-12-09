@@ -1,12 +1,12 @@
 use std::collections::HashMap;
 
-pub fn process_part1(input: &str) -> u32 {
-    let mut left: Vec<u32> = vec![];
-    let mut right: Vec<u32> = vec![];
+pub fn process_part1(input: &str) -> usize {
+    let mut left: Vec<usize> = vec![];
+    let mut right: Vec<usize> = vec![];
     input.lines().for_each(|line| {
-        let v: Vec<_> = line.split_whitespace().collect();
-        left.push(v[0].parse::<u32>().unwrap());
-        right.push(v[1].parse::<u32>().unwrap());
+        let (n1, n2) = line.split_once("   ").unwrap();
+        left.push(n1.parse::<usize>().unwrap());
+        right.push(n2.parse::<usize>().unwrap());
     });
     left.sort();
     right.sort();
@@ -16,13 +16,13 @@ pub fn process_part1(input: &str) -> u32 {
         .sum()
 }
 
-pub fn process_part2(input: &str) -> u32 {
-    let mut left: Vec<u32> = vec![];
-    let mut right: HashMap<u32, u32> = HashMap::new();
+pub fn process_part2(input: &str) -> usize {
+    let mut left: Vec<usize> = vec![];
+    let mut right: HashMap<usize, usize> = HashMap::new();
     input.lines().for_each(|line| {
-        let v: Vec<_> = line.split_whitespace().collect();
-        let n1 = v[0].parse::<u32>().unwrap();
-        let n2 = v[1].parse::<u32>().unwrap();
+        let (n1, n2) = line.split_once("   ").unwrap();
+        let n1 = n1.parse::<usize>().unwrap();
+        let n2 = n2.parse::<usize>().unwrap();
         left.push(n1);
         if let Some(v) = right.get_mut(&n2) {
             *v += 1
